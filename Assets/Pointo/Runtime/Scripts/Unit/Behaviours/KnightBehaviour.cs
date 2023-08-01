@@ -22,7 +22,7 @@ namespace Pointo.Unit
             if (targetUnit == null) return;
 
             // we check on the Scriptable Object if we should attack
-            if (targetHandler.IsFighting() && knightScript.unitSo.ShouldAttack(targetUnit.UnitRaceType))
+            if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting && knightScript.unitSo.ShouldAttack(targetUnit.UnitRaceType))
             {
                 // attack!
                 Debug.LogFormat("{0} is attacking {1} with {2} strength", knightScript.UnitRaceType, targetUnit.UnitRaceType, knightScript.unitSo.attackPower);
