@@ -52,6 +52,7 @@ namespace Pointo.Unit
                     HandleAvailableState();
                     break;
                 case UnitState.Destroyed: break;
+                case UnitState.Breathing: break;
             }
         }
 
@@ -86,6 +87,7 @@ namespace Pointo.Unit
             }
         }
 
+
         private IEnumerator CancelJob()
         {
             yield return new WaitForSeconds(coolDownTime);
@@ -99,14 +101,20 @@ namespace Pointo.Unit
             Collecting,
             CancellingWork,
             Fighting,
-            Destroyed
+            Destroyed,
+            Breathing,
         }
 
-        public bool IsFighting()
+        public void IsFighting()
         {
-            return currentState == UnitState.Fighting;
+            currentState = UnitState.Fighting;
         }
-        
+
+        public void IsBreathing()
+        {
+            currentState = UnitState.Breathing;
+        }
+
         #region Debug
 
         private void OnDrawGizmosSelected()

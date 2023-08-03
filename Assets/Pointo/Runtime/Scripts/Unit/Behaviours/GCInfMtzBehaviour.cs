@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace Pointo.Unit
 {
@@ -9,6 +11,9 @@ namespace Pointo.Unit
         private UnitTargetHandler targetHandler;
         private CombatUnit combatUnitScript;
 
+        private Unit targetUnit;
+
+        public GameObject targetObject;
 
         private void Start()
         {
@@ -17,26 +22,60 @@ namespace Pointo.Unit
             targetHandler.OnObjectReached = HandleEnemyReached;
         }
 
-        private void HandleEnemyReached(GameObject targetObject)
+        private void Update()
         {
-            Unit targetUnit = targetObject.GetComponent<Unit>();
-                     
-            float attackerCurrentPower = (combatUnitScript.unitSo.attackPower + DiceRoll.RollD20());
+            // colocar combate no update??
+        }
 
-            float defenderCurrentProtection = targetObject.GetComponent<CombatUnit>().unitSo.defense;
-            
-            float finalDamage = (attackerCurrentPower - defenderCurrentProtection);
+
+        private void HandleEnemyReached(GameObject targetReached)
+        {
+            targetObject = targetReached;
+
+            targetUnit = targetObject.GetComponent<Unit>();
 
             if (targetUnit == null) return;
 
             // we check on the Scriptable Object if we should attack
-            if (targetHandler.IsFighting() && combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed)
+            if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed)
             {
-                // attack!
+                StartCoroutine(CombatLoop());
+            } else if(targetObject.GetComponent<UnitTargetHandler>().currentState == UnitTargetHandler.UnitState.Destroyed)
+            {
+                StopCoroutine(CombatLoop());
+            }
+
+        }
+
+        IEnumerator CombatLoop()
+        {
+            float waitingTime = combatUnitScript.unitSo.coolDownTime;
+
+            targetHandler.IsBreathing();
+
+            yield return new WaitForSeconds(waitingTime);
+            
+            targetHandler.IsFighting();
+
+            AttackRoll();
+
+        }
+
+        private void AttackRoll ()
+        {
+            if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting)
+            {
+                float attackerCurrentPower = (combatUnitScript.unitSo.attackPower + DiceRoll.RollD20());
+
+                float defenderCurrentProtection = targetObject.GetComponent<CombatUnit>().unitSo.defense;
                 
+                float finalDamage = (attackerCurrentPower - defenderCurrentProtection);
+
                 targetUnit.GetComponent<CombatUnit>().TakeDamage(finalDamage);
                 Debug.LogFormat("{0} is attacking {1} with {2} damage", combatUnitScript.UnitRaceType, targetUnit.UnitRaceType, finalDamage);
+
             }
         }
+
     }   
 }
