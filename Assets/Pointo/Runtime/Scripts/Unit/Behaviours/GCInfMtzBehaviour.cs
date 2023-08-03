@@ -15,6 +15,21 @@ namespace Pointo.Unit
 
         public GameObject targetObject;
 
+//Attacker Modifiers
+        public int adestramentoAttacker;
+        public int raioDeAcaoAttacker;
+        public int pontariaAttacker;
+        public int concentracaoAttacker;
+        public int vigorAttacker;
+
+//Defender Modifiers
+        public int adestramentoDefender;
+        public int protecaoDefender;
+        public int visibilidadeDefender;
+        public int movimentoDefender;
+        public int distanciaAttackerDefender;
+        public int inclinacaoAttackerDefender;
+
         private void Start()
         {
             combatUnitScript = GetComponent<CombatUnit>();
@@ -57,14 +72,22 @@ namespace Pointo.Unit
             
             targetHandler.IsFighting();
 
-            AttackRoll();
+            AttackTurn();
 
         }
 
-        private void AttackRoll ()
+        private void AttackTurn ()
         {
             if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting)
             {
+                int attackerCurrentModifiers = (adestramentoAttacker + raioDeAcaoAttacker + pontariaAttacker - concentracaoAttacker - vigorAttacker);
+                
+                int defenderCurrentModifiers = (adestramentoDefender + protecaoDefender + visibilidadeDefender + movimentoDefender + distanciaAttackerDefender + inclinacaoAttackerDefender);
+
+                int hitProbability = (attackerCurrentModifiers - defenderCurrentModifiers);
+
+
+
                 float attackerCurrentPower = (combatUnitScript.unitSo.attackPower + DiceRoll.RollD20());
 
                 float defenderCurrentProtection = targetObject.GetComponent<CombatUnit>().unitSo.defense;
