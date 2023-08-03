@@ -49,10 +49,11 @@ namespace Pointo.Unit
 
         IEnumerator CombatLoop()
         {
+            float waitingTime = combatUnitScript.unitSo.coolDownTime;
 
             targetHandler.IsBreathing();
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(waitingTime);
             
             targetHandler.IsFighting();
 
