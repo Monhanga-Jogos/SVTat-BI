@@ -1220,6 +1220,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c9349adc933e344b9f5be6ffb86ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  adestramentoAttacker: 0
+  raioDeAcaoAttacker: 0
+  pontariaAttacker: 0
+  concentracaoAttacker: 0
+  vigorAttacker: 0
+  adestramentoDefender: 0
+  protecaoDefender: 0
+  visibilidadeDefender: 0
+  movimentoDefender: 0
+  distanciaAttackerDefender: 0
+  inclinacaoAttackerDefender: 0
+  hitProbability: 0
+  ntzProbability: 0
 --- !u!114 &1163257787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1606,6 +1620,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c9349adc933e344b9f5be6ffb86ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  adestramentoAttacker: 1
+  raioDeAcaoAttacker: 1
+  pontariaAttacker: 1
+  concentracaoAttacker: 0
+  vigorAttacker: 0
+  adestramentoDefender: 0
+  protecaoDefender: 3
+  visibilidadeDefender: 4
+  movimentoDefender: 0
+  distanciaAttackerDefender: 4
+  inclinacaoAttackerDefender: 0
+  hitProbability: 0
+  ntzProbability: 0
 --- !u!114 &1370742099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2521,6 +2549,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c9349adc933e344b9f5be6ffb86ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  adestramentoAttacker: 0
+  raioDeAcaoAttacker: 0
+  pontariaAttacker: 0
+  concentracaoAttacker: 0
+  vigorAttacker: 0
+  adestramentoDefender: 0
+  protecaoDefender: 0
+  visibilidadeDefender: 0
+  movimentoDefender: 0
+  distanciaAttackerDefender: 0
+  inclinacaoAttackerDefender: 0
+  hitProbability: 0
+  ntzProbability: 0
 --- !u!114 &8145696489936272207
 MonoBehaviour:
   m_ObjectHideFlags: 0

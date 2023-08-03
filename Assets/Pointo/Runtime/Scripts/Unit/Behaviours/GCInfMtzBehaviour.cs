@@ -30,6 +30,9 @@ namespace Pointo.Unit
         public int distanciaAttackerDefender;
         public int inclinacaoAttackerDefender;
 
+        public float hitProbability = 0;
+        public float ntzProbability = 0;
+
         private void Start()
         {
             combatUnitScript = GetComponent<CombatUnit>();
@@ -82,11 +85,20 @@ namespace Pointo.Unit
             {
                 int attackerCurrentModifiers = (adestramentoAttacker + raioDeAcaoAttacker + pontariaAttacker - concentracaoAttacker - vigorAttacker);
                 
+                Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAttacker, raioDeAcaoAttacker, pontariaAttacker,concentracaoAttacker,vigorAttacker);
+
                 int defenderCurrentModifiers = (adestramentoDefender + protecaoDefender + visibilidadeDefender + movimentoDefender + distanciaAttackerDefender + inclinacaoAttackerDefender);
 
-                int hitProbability = (attackerCurrentModifiers - defenderCurrentModifiers);
+                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoDefender,protecaoDefender,visibilidadeDefender,movimentoDefender,distanciaAttackerDefender,inclinacaoAttackerDefender);
 
+//                float attackerCurrentModifiersFloat = (float)attackerCurrentModifiers;
+//                float defenderCurrentModifiersFloat = (float)defenderCurrentModifiers;
 
+                int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);
+
+                if (hitProbabilityValue <= -8) {hitProbability = 0.05f;}
+
+                Debug.LogFormat("Probabilidade de Acerto = {0}", hitProbability);
 
                 float attackerCurrentPower = (combatUnitScript.unitSo.attackPower + DiceRoll.RollD20());
 
