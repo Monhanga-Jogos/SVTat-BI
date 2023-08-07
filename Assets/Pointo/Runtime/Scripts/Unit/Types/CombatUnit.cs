@@ -4,6 +4,18 @@ namespace Pointo.Unit
 {
     public class CombatUnit : Unit
     {
+        //Permanent Modifiers
+        public int adestramento;
+        public int raioDeAcao;
+        public int pontaria;
+        public int protecao;
+
+        //Temporary Modifiers
+        public int concentracao;
+        public int vigor;
+        public int movimento;
+        public int visibilidade;
+
        
         private new void OnEnable()
         {

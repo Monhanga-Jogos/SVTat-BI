@@ -38,6 +38,12 @@ namespace Pointo.Unit
             combatUnitScript = GetComponent<CombatUnit>();
             targetHandler = GetComponent<UnitTargetHandler>();
             targetHandler.OnObjectReached = HandleEnemyReached;
+
+            //Permanent Modifiers
+            adestramentoAttacker = combatUnitScript.adestramento;
+            raioDeAcaoAttacker = combatUnitScript.raioDeAcao;
+            pontariaAttacker = combatUnitScript.pontaria;
+
         }
 
         private void Update()
@@ -83,9 +89,17 @@ namespace Pointo.Unit
         {
             if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting)
             {
+                concentracaoAttacker = combatUnitScript.concentracao;
+                vigorAttacker = combatUnitScript.vigor;
+
                 int attackerCurrentModifiers = (adestramentoAttacker + raioDeAcaoAttacker + pontariaAttacker - concentracaoAttacker - vigorAttacker);
                 
                 Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAttacker, raioDeAcaoAttacker, pontariaAttacker,concentracaoAttacker,vigorAttacker);
+                
+                adestramentoDefender = targetObject.GetComponent<CombatUnit>().adestramento;
+                protecaoDefender = targetObject.GetComponent<CombatUnit>().protecao;
+                visibilidadeDefender = targetObject.GetComponent<CombatUnit>().visibilidade;
+                movimentoDefender = targetObject.GetComponent<CombatUnit>().movimento;
 
                 int defenderCurrentModifiers = (adestramentoDefender + protecaoDefender + visibilidadeDefender + movimentoDefender + distanciaAttackerDefender + inclinacaoAttackerDefender);
 
@@ -95,8 +109,10 @@ namespace Pointo.Unit
 //                float defenderCurrentModifiersFloat = (float)defenderCurrentModifiers;
 
                 int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);
+                
+                Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
 
-                if (hitProbabilityValue <= -8) {hitProbability = 0.05f;}
+                hitProbability = CalculateHitProbability(hitProbabilityValue);
 
                 Debug.LogFormat("Probabilidade de Acerto = {0}", hitProbability);
 
@@ -116,6 +132,21 @@ namespace Pointo.Unit
                 Debug.LogFormat("{0} is attacking {1} with {2} damage", combatUnitScript.UnitRaceType, targetUnit.UnitRaceType, finalDamage);
 
             }
+        }
+
+        private float CalculateHitProbability(int referenceValue)
+        {
+            if (referenceValue <= -8) {return 0.05f;}
+            else if (-8 < referenceValue && referenceValue <= -6) {return 0.15f;}
+            else if (-6 < referenceValue && referenceValue <= -4) {return 0.25f;}
+            else if (-4 < referenceValue && referenceValue <= -2) {return 0.35f;}
+            else if (-2 < referenceValue && referenceValue <= 0) {return 0.45f;}
+            else if (0 < referenceValue && referenceValue <= 2) {return 0.55f;}
+            else if (2 < referenceValue && referenceValue <= 4) {return 0.65f;}
+            else if (4 < referenceValue && referenceValue <= 6) {return 0.75f;}
+            else if (6 < referenceValue && referenceValue <= 8) {return 0.85f;}
+            else if (8 > referenceValue) {return 0.95f;}
+            else return 0.0f;
         }
 
     }   

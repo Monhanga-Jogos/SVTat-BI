@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 1163257783}
   - component: {fileID: 1163257782}
   m_Layer: 9
-  m_Name: GC Inf Mtz
+  m_Name: GC Inf Mtz EP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1230,8 +1230,8 @@ MonoBehaviour:
   protecaoDefender: 0
   visibilidadeDefender: 0
   movimentoDefender: 0
-  distanciaAttackerDefender: 0
-  inclinacaoAttackerDefender: 0
+  distanciaAttackerDefender: 2
+  inclinacaoAttackerDefender: 2
   hitProbability: 0
   ntzProbability: 0
 --- !u!114 &1163257787
@@ -1264,6 +1264,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitSo: {fileID: 11400000, guid: c52c6ccc27ab4ff459cd86e1eda552b6, type: 2}
   currentHealth: 0
+  adestramento: 2
+  raioDeAcao: 0
+  pontaria: 1
+  protecao: 1
+  concentracao: 0
+  vigor: 0
+  movimento: 0
+  visibilidade: 2
 --- !u!4 &1229736142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6715404778457186317, guid: 7318425a59d6844a39e4dd327a2e0daa,
@@ -1503,7 +1511,7 @@ GameObject:
   - component: {fileID: 1370742095}
   - component: {fileID: 1370742094}
   m_Layer: 9
-  m_Name: GC Inf Mtz (1)
+  m_Name: GC Inf Mtz EV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1621,17 +1629,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAttacker: 1
-  raioDeAcaoAttacker: 1
-  pontariaAttacker: 1
+  adestramentoAttacker: 0
+  raioDeAcaoAttacker: 0
+  pontariaAttacker: 0
   concentracaoAttacker: 0
   vigorAttacker: 0
   adestramentoDefender: 0
-  protecaoDefender: 3
-  visibilidadeDefender: 4
+  protecaoDefender: 0
+  visibilidadeDefender: 0
   movimentoDefender: 0
-  distanciaAttackerDefender: 4
-  inclinacaoAttackerDefender: 0
+  distanciaAttackerDefender: 2
+  inclinacaoAttackerDefender: 2
   hitProbability: 0
   ntzProbability: 0
 --- !u!114 &1370742099
@@ -1664,6 +1672,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitSo: {fileID: 11400000, guid: bdc177c420e4808469f3471b349fa877, type: 2}
   currentHealth: 0
+  adestramento: 1
+  raioDeAcao: 0
+  pontaria: 1
+  protecao: 1
+  concentracao: 0
+  vigor: 0
+  movimento: 0
+  visibilidade: 0
 --- !u!1 &1657835924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2531,7 +2547,7 @@ GameObject:
   - component: {fileID: 8145696489936272203}
   - component: {fileID: 8145696489936272202}
   m_Layer: 9
-  m_Name: GC Inf Mtz
+  m_Name: GC Inf Mtz ForPron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2559,8 +2575,8 @@ MonoBehaviour:
   protecaoDefender: 0
   visibilidadeDefender: 0
   movimentoDefender: 0
-  distanciaAttackerDefender: 0
-  inclinacaoAttackerDefender: 0
+  distanciaAttackerDefender: 2
+  inclinacaoAttackerDefender: 2
   hitProbability: 0
   ntzProbability: 0
 --- !u!114 &8145696489936272207
@@ -2593,6 +2609,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitSo: {fileID: 11400000, guid: bdc177c420e4808469f3471b349fa877, type: 2}
   currentHealth: 0
+  adestramento: 3
+  raioDeAcao: 0
+  pontaria: 1
+  protecao: 1
+  concentracao: 0
+  vigor: 0
+  movimento: 0
+  visibilidade: 1
 --- !u!33 &8145696490435338096
 MeshFilter:
   m_ObjectHideFlags: 0
