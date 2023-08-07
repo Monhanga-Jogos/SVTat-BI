@@ -100,6 +100,12 @@ namespace Pointo.Unit
 
                 Debug.LogFormat("Probabilidade de Acerto = {0}", hitProbability);
 
+                int attackerSoldiersQuantity = Mathf.RoundToInt(combatUnitScript.currentHealth); 
+
+                int defenderSoldiersQuantity = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().currentHealth);
+
+                Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", attackerSoldiersQuantity,defenderSoldiersQuantity);                
+
                 float attackerCurrentPower = (combatUnitScript.unitSo.attackPower + DiceRoll.RollD20());
 
                 float defenderCurrentProtection = targetObject.GetComponent<CombatUnit>().unitSo.defense;
