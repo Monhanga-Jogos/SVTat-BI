@@ -32,6 +32,7 @@ namespace Pointo.Unit
 
         public float hitProbability = 0;
         public float ntzProbability = 0;
+        private float groupsOfShooters = 1;
 
         private void Start()
         {
@@ -108,25 +109,19 @@ namespace Pointo.Unit
 //                float attackerCurrentModifiersFloat = (float)attackerCurrentModifiers;
 //                float defenderCurrentModifiersFloat = (float)defenderCurrentModifiers;
 
-                int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);
-                
+                int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
-
                 hitProbability = CalculateHitProbability(hitProbabilityValue);
-
                 Debug.LogFormat("Probabilidade de Acerto = {0}", hitProbability);
 
-                int attackerSoldiersQuantity = Mathf.RoundToInt(combatUnitScript.currentHealth); 
-
-                int defenderSoldiersQuantity = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().currentHealth);
-
-                Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", attackerSoldiersQuantity,defenderSoldiersQuantity);                
+                ntzProbability = CalculateNeutralizationProbability(hitProbability);
+                Debug.LogFormat("Probabilidade de Neutralização = {0}", ntzProbability);
 
                 float attackerCurrentPower = (combatUnitScript.unitSo.attackPower + DiceRoll.RollD20());
 
                 float defenderCurrentProtection = targetObject.GetComponent<CombatUnit>().unitSo.defense;
                 
-                float finalDamage = (attackerCurrentPower - defenderCurrentProtection);
+                int finalDamage = Mathf.RoundToInt(attackerCurrentPower - defenderCurrentProtection);
 
                 targetUnit.GetComponent<CombatUnit>().TakeDamage(finalDamage);
                 Debug.LogFormat("{0} is attacking {1} with {2} damage", combatUnitScript.UnitRaceType, targetUnit.UnitRaceType, finalDamage);
@@ -147,6 +142,17 @@ namespace Pointo.Unit
             else if (6 < referenceValue && referenceValue <= 8) {return 0.85f;}
             else if (8 > referenceValue) {return 0.95f;}
             else return 0.0f;
+        }
+
+        private float CalculateNeutralizationProbability(float singleHitProbability)
+        {
+            int attackerSoldiersQuantity = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
+            int defenderSoldiersQuantity = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
+            Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", attackerSoldiersQuantity,defenderSoldiersQuantity); 
+
+            float ntzValue = 1 - Mathf.Pow((1 - singleHitProbability), groupsOfShooters);
+            float ntzPercentage = Mathf.Round(ntzValue * 100.0f) * 0.01f;
+            return ntzPercentage;
         }
 
     }   

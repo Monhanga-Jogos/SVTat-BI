@@ -21,7 +21,7 @@ namespace Pointo.Unit
 
         public UnitRaceType UnitRaceType => unitSo.unitRaceType;
 
-        public float currentHealth;
+        public int efetivoAtual;
 
         protected void Start()
         {

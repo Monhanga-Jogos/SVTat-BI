@@ -15,13 +15,14 @@ namespace Pointo.Unit
         public int vigor;
         public int movimento;
         public int visibilidade;
+        
 
        
         private new void OnEnable()
         {
             base.OnEnable();
             PointoController.Actions.onObjectRightClicked += HandleObjectClicked;
-            currentHealth = unitSo.maxHealth;
+            efetivoAtual = unitSo.efetivoCompleto;
         }
 
         private new void OnDisable()
@@ -42,14 +43,14 @@ namespace Pointo.Unit
             Debug.LogFormat("{0} is moving towards {1}", UnitRaceType, targetUnit.UnitRaceType);
         }
 
-        public void TakeDamage (float damageTaken)
+        public void TakeDamage (int damageTaken)
         {
-            if (currentHealth > 0)
+            if (efetivoAtual > 0)
             {
-            currentHealth -= damageTaken;
+            efetivoAtual -= damageTaken;
             } else
             {
-            currentHealth = 0;
+            efetivoAtual = 0;
             UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
             GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
             }
