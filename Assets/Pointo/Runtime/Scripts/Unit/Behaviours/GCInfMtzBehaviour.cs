@@ -32,7 +32,8 @@ namespace Pointo.Unit
 
         public float hitProbability = 0;
         public float ntzProbability = 0;
-        private float groupsOfShooters = 1;
+        private float groupsOfShooters = 1.0f;
+        private int numberOfTests;
 
         private void Start()
         {
@@ -103,11 +104,7 @@ namespace Pointo.Unit
                 movimentoDefender = targetObject.GetComponent<CombatUnit>().movimento;
 
                 int defenderCurrentModifiers = (adestramentoDefender + protecaoDefender + visibilidadeDefender + movimentoDefender + distanciaAttackerDefender + inclinacaoAttackerDefender);
-
                 Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoDefender,protecaoDefender,visibilidadeDefender,movimentoDefender,distanciaAttackerDefender,inclinacaoAttackerDefender);
-
-//                float attackerCurrentModifiersFloat = (float)attackerCurrentModifiers;
-//                float defenderCurrentModifiersFloat = (float)defenderCurrentModifiers;
 
                 int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
@@ -146,9 +143,21 @@ namespace Pointo.Unit
 
         private float CalculateNeutralizationProbability(float singleHitProbability)
         {
-            int attackerSoldiersQuantity = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
-            int defenderSoldiersQuantity = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
-            Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", attackerSoldiersQuantity,defenderSoldiersQuantity); 
+            int shootersQuantity = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
+            int targetsQuantity = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
+            Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", shootersQuantity,targetsQuantity); 
+
+            if (shootersQuantity <= targetsQuantity)
+            {
+                numberOfTests = shootersQuantity;
+                groupsOfShooters = 1.0f;
+            } else
+            {
+                numberOfTests = targetsQuantity;
+                groupsOfShooters = Mathf.RoundToInt(shootersQuantity/targetsQuantity);
+            }
+
+            Debug.LogFormat("Grupos de Atiradores = {0} Homens / Alvo", groupsOfShooters);
 
             float ntzValue = 1 - Mathf.Pow((1 - singleHitProbability), groupsOfShooters);
             float ntzPercentage = Mathf.Round(ntzValue * 100.0f) * 0.01f;
