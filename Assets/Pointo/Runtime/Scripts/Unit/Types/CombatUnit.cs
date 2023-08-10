@@ -31,6 +31,14 @@ namespace Pointo.Unit
             PointoController.Actions.onObjectRightClicked -= HandleObjectClicked;
         }
         
+        void Update()
+        {
+            if (efetivoAtual <= 0)
+            {
+                UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
+                GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
+            }
+        }
         private void HandleObjectClicked(GameObject targetObject)
         {
             if (!IsSelected) return;
@@ -48,11 +56,6 @@ namespace Pointo.Unit
             if (efetivoAtual > 0)
             {
             efetivoAtual -= damageTaken;
-            } else
-            {
-            efetivoAtual = 0;
-            UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
-            GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
             }
         }
     }   

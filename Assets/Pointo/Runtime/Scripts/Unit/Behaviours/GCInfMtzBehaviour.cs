@@ -109,20 +109,27 @@ namespace Pointo.Unit
                 int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
                 hitProbability = CalculateHitProbability(hitProbabilityValue);
-                Debug.LogFormat("Probabilidade de Acerto = {0}", hitProbability);
+                Debug.LogFormat("Probabilidade de Acerto = {0}", hitProbability*100);
 
                 ntzProbability = CalculateNeutralizationProbability(hitProbability);
-                Debug.LogFormat("Probabilidade de Neutralização = {0}", ntzProbability);
+                Debug.LogFormat("Probabilidade de Neutralização = {0}%", ntzProbability*100);
+                Debug.LogFormat("Quantidade de Testes = {0}", numberOfTests);
 
-                float attackerCurrentPower = (combatUnitScript.unitSo.attackPower + DiceRoll.RollD20());
+                for (int i = 1; i < numberOfTests+1; i++)
+                {
+                    int luckResult = DiceRoll.RollD100();
+                    Debug.LogFormat("Rolagem Nr {0}, d100 = {1}", i, luckResult);
 
-                float defenderCurrentProtection = targetObject.GetComponent<CombatUnit>().unitSo.defense;
-                
-                int finalDamage = Mathf.RoundToInt(attackerCurrentPower - defenderCurrentProtection);
-
-                targetUnit.GetComponent<CombatUnit>().TakeDamage(finalDamage);
-                Debug.LogFormat("{0} is attacking {1} with {2} damage", combatUnitScript.UnitRaceType, targetUnit.UnitRaceType, finalDamage);
-
+                    if (luckResult <= ntzProbability*100)
+                    {
+                        int finalDamage = 1;
+                        targetUnit.GetComponent<CombatUnit>().TakeDamage(finalDamage);
+                        Debug.LogFormat("{0} is attacking {1} with {2} damage", combatUnitScript.UnitRaceType, targetUnit.UnitRaceType, finalDamage);
+                    } else 
+                    {
+                        Debug.LogFormat("{0} attack failed", combatUnitScript.UnitRaceType);
+                    }
+                }
             }
         }
 
