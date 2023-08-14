@@ -109,7 +109,7 @@ namespace Pointo.Unit
                 int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
                 hitProbability = CalculateHitProbability(hitProbabilityValue);
-                Debug.LogFormat("Probabilidade de Acerto = {0}", hitProbability*100);
+                Debug.LogFormat("Probabilidade de Acerto = {0}%", hitProbability*100);
 
                 ntzProbability = CalculateNeutralizationProbability(hitProbability);
                 Debug.LogFormat("Probabilidade de Neutralização = {0}%", ntzProbability*100);
