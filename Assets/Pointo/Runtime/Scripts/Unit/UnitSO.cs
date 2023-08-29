@@ -17,7 +17,7 @@ namespace Pointo.Unit
         public Material destroyedMat;
         public float attackPower = 1.0f;
         public float defense = 0.5f;
-        public float maxHealth = 10f;
+        public int efetivoCompleto = 10;
 
         [Tooltip("Time to rest after collecting a Resource")]
         public float coolDownTime = 2f;

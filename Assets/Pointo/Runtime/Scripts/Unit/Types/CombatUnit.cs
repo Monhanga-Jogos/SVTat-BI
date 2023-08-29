@@ -4,12 +4,25 @@ namespace Pointo.Unit
 {
     public class CombatUnit : Unit
     {
+        //Permanent Modifiers
+        public int adestramento;
+        public int raioDeAcao;
+        public int pontaria;
+        public int protecao;
+
+        //Temporary Modifiers
+        public int concentracao;
+        public int vigor;
+        public int movimento;
+        public int visibilidade;
+        
+
        
         private new void OnEnable()
         {
             base.OnEnable();
             PointoController.Actions.onObjectRightClicked += HandleObjectClicked;
-            currentHealth = unitSo.maxHealth;
+            efetivoAtual = unitSo.efetivoCompleto;
         }
 
         private new void OnDisable()
@@ -18,6 +31,14 @@ namespace Pointo.Unit
             PointoController.Actions.onObjectRightClicked -= HandleObjectClicked;
         }
         
+        void Update()
+        {
+            if (efetivoAtual <= 0)
+            {
+                UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
+                GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
+            }
+        }
         private void HandleObjectClicked(GameObject targetObject)
         {
             if (!IsSelected) return;
@@ -30,16 +51,11 @@ namespace Pointo.Unit
             Debug.LogFormat("{0} is moving towards {1}", UnitRaceType, targetUnit.UnitRaceType);
         }
 
-        public void TakeDamage (float damageTaken)
+        public void TakeDamage (int damageTaken)
         {
-            if (currentHealth > 0)
+            if (efetivoAtual > 0)
             {
-            currentHealth -= damageTaken;
-            } else
-            {
-            currentHealth = 0;
-            UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
-            GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
+            efetivoAtual -= damageTaken;
             }
         }
     }   

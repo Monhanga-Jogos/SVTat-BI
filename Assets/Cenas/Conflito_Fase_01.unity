@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 1163257783}
   - component: {fileID: 1163257782}
   m_Layer: 9
-  m_Name: GC Inf Mtz
+  m_Name: GC Inf Mtz EP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1117,7 +1117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163257780}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.8, y: 0.5, z: 21.9}
+  m_LocalPosition: {x: 53.88, y: 5.11, z: 15.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 608384400}
@@ -1200,7 +1200,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1220,6 +1220,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c9349adc933e344b9f5be6ffb86ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  adestramentoAttacker: 0
+  raioDeAcaoAttacker: 0
+  pontariaAttacker: 0
+  concentracaoAttacker: 0
+  vigorAttacker: 0
+  adestramentoDefender: 0
+  protecaoDefender: 0
+  visibilidadeDefender: 0
+  movimentoDefender: 0
+  distanciaAttackerDefender: 2
+  inclinacaoAttackerDefender: 2
+  hitProbability: 0
+  ntzProbability: 0
 --- !u!114 &1163257787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,7 +1263,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitSo: {fileID: 11400000, guid: c52c6ccc27ab4ff459cd86e1eda552b6, type: 2}
-  currentHealth: 0
+  efetivoAtual: 0
+  adestramento: 2
+  raioDeAcao: 0
+  pontaria: 1
+  protecao: 1
+  concentracao: 0
+  vigor: 0
+  movimento: 0
+  visibilidade: 2
 --- !u!4 &1229736142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6715404778457186317, guid: 7318425a59d6844a39e4dd327a2e0daa,
@@ -1489,7 +1511,7 @@ GameObject:
   - component: {fileID: 1370742095}
   - component: {fileID: 1370742094}
   m_Layer: 9
-  m_Name: GC Inf Mtz (1)
+  m_Name: GC Inf Mtz EV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1503,7 +1525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370742092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.1, y: 0.5, z: 41.7}
+  m_LocalPosition: {x: 72.51, y: 0.5, z: 12.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1657835925}
@@ -1586,7 +1608,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1606,6 +1628,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c9349adc933e344b9f5be6ffb86ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  adestramentoAttacker: 0
+  raioDeAcaoAttacker: 0
+  pontariaAttacker: 0
+  concentracaoAttacker: 0
+  vigorAttacker: 0
+  adestramentoDefender: 0
+  protecaoDefender: 0
+  visibilidadeDefender: 0
+  movimentoDefender: 0
+  distanciaAttackerDefender: 2
+  inclinacaoAttackerDefender: 2
+  hitProbability: 0
+  ntzProbability: 0
 --- !u!114 &1370742099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1635,7 +1671,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitSo: {fileID: 11400000, guid: bdc177c420e4808469f3471b349fa877, type: 2}
-  currentHealth: 0
+  efetivoAtual: 0
+  adestramento: 1
+  raioDeAcao: 0
+  pontaria: 1
+  protecao: 1
+  concentracao: 0
+  vigor: 0
+  movimento: 0
+  visibilidade: 0
 --- !u!1 &1657835924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,17 +2283,17 @@ PrefabInstance:
     - target: {fileID: 4392459130187356243, guid: 948b8c00f36e84ea6a99445f760c7afe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.7
+      value: 63.4
       objectReference: {fileID: 0}
     - target: {fileID: 4392459130187356243, guid: 948b8c00f36e84ea6a99445f760c7afe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 4392459130187356243, guid: 948b8c00f36e84ea6a99445f760c7afe,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.2
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: 4392459132245051825, guid: 948b8c00f36e84ea6a99445f760c7afe,
         type: 3}
@@ -2401,7 +2445,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2425,7 +2469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8145696489936272205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.6, y: 0.5, z: 41.7}
+  m_LocalPosition: {x: 68.7, y: 0.5, z: 27.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8145696490435338101}
@@ -2503,7 +2547,7 @@ GameObject:
   - component: {fileID: 8145696489936272203}
   - component: {fileID: 8145696489936272202}
   m_Layer: 9
-  m_Name: GC Inf Mtz
+  m_Name: GC Inf Mtz ForPron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2521,6 +2565,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c9349adc933e344b9f5be6ffb86ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  adestramentoAttacker: 0
+  raioDeAcaoAttacker: 0
+  pontariaAttacker: 0
+  concentracaoAttacker: 0
+  vigorAttacker: 0
+  adestramentoDefender: 0
+  protecaoDefender: 0
+  visibilidadeDefender: 0
+  movimentoDefender: 0
+  distanciaAttackerDefender: 2
+  inclinacaoAttackerDefender: 2
+  hitProbability: 0
+  ntzProbability: 0
 --- !u!114 &8145696489936272207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2550,7 +2608,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitSo: {fileID: 11400000, guid: bdc177c420e4808469f3471b349fa877, type: 2}
-  currentHealth: 0
+  efetivoAtual: 0
+  adestramento: 3
+  raioDeAcao: 0
+  pontaria: 1
+  protecao: 1
+  concentracao: 0
+  vigor: 0
+  movimento: 0
+  visibilidade: 1
 --- !u!33 &8145696490435338096
 MeshFilter:
   m_ObjectHideFlags: 0

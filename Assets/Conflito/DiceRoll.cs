@@ -13,6 +13,12 @@ public class DiceRoll : MonoBehaviour
         return diceResult;
     }
 
+    public static int RollD100 ()
+    {
+        int d100Result = Random.Range(1, 100);
+        return d100Result;
+    }
+
     public static int AnyDiceRoll(int dSides, int rolls)
     {
 	    int rollResult = 0;
