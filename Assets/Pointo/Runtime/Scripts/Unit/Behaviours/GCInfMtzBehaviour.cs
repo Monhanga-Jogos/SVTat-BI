@@ -16,19 +16,19 @@ namespace Pointo.Unit
         public GameObject targetObject;
 
 //Attacker Modifiers
-        public int adestramentoAttacker;
-        public int raioDeAcaoAttacker;
-        public int pontariaAttacker;
-        public int concentracaoAttacker;
-        public int vigorAttacker;
+        public int adestramentoAtirador;
+        public int raioDeAcaoAtirador;
+        public int pontariaAtirador;
+        public int concentracaoAtirador;
+        public int vigorAtirador;
 
 //Defender Modifiers
-        public int adestramentoDefender;
-        public int protecaoDefender;
-        public int visibilidadeDefender;
-        public int movimentoDefender;
-        public int distanciaAttackerDefender;
-        public int inclinacaoAttackerDefender;
+        public int adestramentoAlvo;
+        public int protecaoAlvo;
+        public int visibilidadeAlvo;
+        public int movimentoAlvo;
+        public int distanciaAtiradorAlvo;
+        public int inclinacaoAtiradorAlvo;
 
         public float hitProbability = 0;
         public float ntzProbability = 0;
@@ -42,9 +42,9 @@ namespace Pointo.Unit
             targetHandler.OnObjectReached = HandleEnemyReached;
 
             //Permanent Modifiers
-            adestramentoAttacker = combatUnitScript.adestramento;
-            raioDeAcaoAttacker = combatUnitScript.raioDeAcao;
-            pontariaAttacker = combatUnitScript.pontaria;
+            adestramentoAtirador = combatUnitScript.adestramento;
+            raioDeAcaoAtirador = combatUnitScript.raioDeAcao;
+            pontariaAtirador = combatUnitScript.pontaria;
 
         }
 
@@ -83,28 +83,74 @@ namespace Pointo.Unit
             
             targetHandler.IsFighting();
 
-            AttackTurn();
+            AttackerTurn();
 
         }
 
-        private void AttackTurn ()
+        private void AttackerTurn ()
         {
             if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting)
             {
-                concentracaoAttacker = combatUnitScript.concentracao;
-                vigorAttacker = combatUnitScript.vigor;
+                concentracaoAtirador = combatUnitScript.concentracao;
+                vigorAtirador = combatUnitScript.vigor;
 
-                int attackerCurrentModifiers = (adestramentoAttacker + raioDeAcaoAttacker + pontariaAttacker - concentracaoAttacker - vigorAttacker);
+                int attackerCurrentModifiers = (adestramentoAtirador + raioDeAcaoAtirador + pontariaAtirador - concentracaoAtirador - vigorAtirador);
                 
-                Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAttacker, raioDeAcaoAttacker, pontariaAttacker,concentracaoAttacker,vigorAttacker);
+                Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAtirador, raioDeAcaoAtirador, pontariaAtirador,concentracaoAtirador,vigorAtirador);
                 
-                adestramentoDefender = targetObject.GetComponent<CombatUnit>().adestramento;
-                protecaoDefender = targetObject.GetComponent<CombatUnit>().protecao;
-                visibilidadeDefender = targetObject.GetComponent<CombatUnit>().visibilidade;
-                movimentoDefender = targetObject.GetComponent<CombatUnit>().movimento;
+                adestramentoAlvo = targetObject.GetComponent<CombatUnit>().adestramento;
+                protecaoAlvo = targetObject.GetComponent<CombatUnit>().protecao;
+                visibilidadeAlvo = targetObject.GetComponent<CombatUnit>().visibilidade;
+                movimentoAlvo = targetObject.GetComponent<CombatUnit>().movimento;
 
-                int defenderCurrentModifiers = (adestramentoDefender + protecaoDefender + visibilidadeDefender + movimentoDefender + distanciaAttackerDefender + inclinacaoAttackerDefender);
-                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoDefender,protecaoDefender,visibilidadeDefender,movimentoDefender,distanciaAttackerDefender,inclinacaoAttackerDefender);
+                int defenderCurrentModifiers = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
+                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
+
+                int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);                
+                Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
+                hitProbability = CalculateHitProbability(hitProbabilityValue);
+                Debug.LogFormat("Probabilidade de Acerto = {0}%", hitProbability*100);
+
+                ntzProbability = CalculateNeutralizationProbability(hitProbability);
+                Debug.LogFormat("Probabilidade de Neutralização = {0}%", ntzProbability*100);
+                Debug.LogFormat("Quantidade de Testes = {0}", numberOfTests);
+
+                for (int i = 1; i < numberOfTests+1; i++)
+                {
+                    int luckResult = DiceRoll.RollD100();
+                    Debug.LogFormat("Rolagem Nr {0}, d100 = {1}", i, luckResult);
+
+                    if (luckResult <= ntzProbability*100)
+                    {
+                        int finalDamage = 1;
+                        targetUnit.GetComponent<CombatUnit>().TakeDamage(finalDamage);
+                        Debug.LogFormat("{0} is attacking {1} with {2} damage", combatUnitScript.UnitRaceType, targetUnit.UnitRaceType, finalDamage);
+                    } else 
+                    {
+                        Debug.LogFormat("{0} attack failed", combatUnitScript.UnitRaceType);
+                    }
+                }
+            }
+        }
+
+        private void DefenderTurn ()
+        {
+            if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting)
+            {
+                concentracaoAtirador = combatUnitScript.concentracao;
+                vigorAtirador = combatUnitScript.vigor;
+
+                int attackerCurrentModifiers = (adestramentoAtirador + raioDeAcaoAtirador + pontariaAtirador - concentracaoAtirador - vigorAtirador);
+                
+                Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAtirador, raioDeAcaoAtirador, pontariaAtirador,concentracaoAtirador,vigorAtirador);
+                
+                adestramentoAlvo = targetObject.GetComponent<CombatUnit>().adestramento;
+                protecaoAlvo = targetObject.GetComponent<CombatUnit>().protecao;
+                visibilidadeAlvo = targetObject.GetComponent<CombatUnit>().visibilidade;
+                movimentoAlvo = targetObject.GetComponent<CombatUnit>().movimento;
+
+                int defenderCurrentModifiers = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
+                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
 
                 int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
