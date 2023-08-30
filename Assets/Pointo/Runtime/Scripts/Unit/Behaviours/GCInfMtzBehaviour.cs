@@ -15,24 +15,24 @@ namespace Pointo.Unit
 
         public GameObject targetObject;
 
-//Attacker Modifiers
-        public int adestramentoAttacker;
-        public int raioDeAcaoAttacker;
-        public int pontariaAttacker;
-        public int concentracaoAttacker;
-        public int vigorAttacker;
+//Modificadores do Atirador
+        public int adestramentoAtirador;
+        public int raioDeAcaoAtirador;
+        public int pontariaAtirador;
+        public int concentracaoAtirador;
+        public int vigorAtirador;
 
-//Defender Modifiers
-        public int adestramentoDefender;
-        public int protecaoDefender;
-        public int visibilidadeDefender;
-        public int movimentoDefender;
-        public int distanciaAttackerDefender;
-        public int inclinacaoAttackerDefender;
+//Modificadores do Alvo
+        public int adestramentoAlvo;
+        public int protecaoAlvo;
+        public int visibilidadeAlvo;
+        public int movimentoAlvo;
+        public int distanciaAtiradorAlvo;
+        public int inclinacaoAtiradorAlvo;
 
         public float hitProbability = 0;
         public float ntzProbability = 0;
-        private float groupsOfShooters = 1.0f;
+        private float groposDeAtiradores = 1.0f;
         private int numberOfTests;
 
         private void Start()
@@ -40,12 +40,6 @@ namespace Pointo.Unit
             combatUnitScript = GetComponent<CombatUnit>();
             targetHandler = GetComponent<UnitTargetHandler>();
             targetHandler.OnObjectReached = HandleEnemyReached;
-
-            //Permanent Modifiers
-            adestramentoAttacker = combatUnitScript.adestramento;
-            raioDeAcaoAttacker = combatUnitScript.raioDeAcao;
-            pontariaAttacker = combatUnitScript.pontaria;
-
         }
 
         private void Update()
@@ -83,30 +77,41 @@ namespace Pointo.Unit
             
             targetHandler.IsFighting();
 
-            AttackTurn();
+            AttackerTurn();
+            DefenderTurn();
 
         }
 
-        private void AttackTurn ()
+        private void AttackerTurn ()
         {
             if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting)
             {
-                concentracaoAttacker = combatUnitScript.concentracao;
-                vigorAttacker = combatUnitScript.vigor;
+                // Modificadores permanentes
+                adestramentoAtirador = combatUnitScript.adestramento;
+                raioDeAcaoAtirador = combatUnitScript.raioDeAcao;
+                pontariaAtirador = combatUnitScript.pontaria;
 
-                int attackerCurrentModifiers = (adestramentoAttacker + raioDeAcaoAttacker + pontariaAttacker - concentracaoAttacker - vigorAttacker);
+                // Modificadores temporários
+                concentracaoAtirador = combatUnitScript.concentracao;
+                vigorAtirador = combatUnitScript.vigor;
+
+                int modificadoresDoAtirador = (adestramentoAtirador + raioDeAcaoAtirador + pontariaAtirador - concentracaoAtirador - vigorAtirador);
                 
-                Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAttacker, raioDeAcaoAttacker, pontariaAttacker,concentracaoAttacker,vigorAttacker);
+                Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAtirador, raioDeAcaoAtirador, pontariaAtirador,concentracaoAtirador,vigorAtirador);
                 
-                adestramentoDefender = targetObject.GetComponent<CombatUnit>().adestramento;
-                protecaoDefender = targetObject.GetComponent<CombatUnit>().protecao;
-                visibilidadeDefender = targetObject.GetComponent<CombatUnit>().visibilidade;
-                movimentoDefender = targetObject.GetComponent<CombatUnit>().movimento;
+                adestramentoAlvo = targetObject.GetComponent<CombatUnit>().adestramento;
+                protecaoAlvo = targetObject.GetComponent<CombatUnit>().protecao;
+                visibilidadeAlvo = targetObject.GetComponent<CombatUnit>().visibilidade;
+                movimentoAlvo = targetObject.GetComponent<CombatUnit>().movimento;
 
-                int defenderCurrentModifiers = (adestramentoDefender + protecaoDefender + visibilidadeDefender + movimentoDefender + distanciaAttackerDefender + inclinacaoAttackerDefender);
-                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoDefender,protecaoDefender,visibilidadeDefender,movimentoDefender,distanciaAttackerDefender,inclinacaoAttackerDefender);
+                // Modificadores relativos
+//                distanciaAtiradorAlvo = medirDistânciaEntreGameObjects
+//                inclinacaoAtiradorAlvo = medirAnguloEntreGameObjects
 
-                int hitProbabilityValue = (attackerCurrentModifiers - defenderCurrentModifiers);                
+                int modificadoresDoAlvo = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
+                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
+
+                int hitProbabilityValue = (modificadoresDoAtirador - modificadoresDoAlvo);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
                 hitProbability = CalculateHitProbability(hitProbabilityValue);
                 Debug.LogFormat("Probabilidade de Acerto = {0}%", hitProbability*100);
@@ -133,6 +138,62 @@ namespace Pointo.Unit
             }
         }
 
+        private void DefenderTurn ()
+        {
+            if (targetHandler.currentState == UnitTargetHandler.UnitState.Fighting)
+            {
+                // Modificadores permanentes
+                adestramentoAtirador = targetObject.GetComponent<CombatUnit>().adestramento;
+                raioDeAcaoAtirador = targetObject.GetComponent<CombatUnit>().raioDeAcao;
+                pontariaAtirador = targetObject.GetComponent<CombatUnit>().pontaria;
+
+                // Modificadores temporários
+                concentracaoAtirador = targetObject.GetComponent<CombatUnit>().concentracao;
+                vigorAtirador = targetObject.GetComponent<CombatUnit>().vigor;
+
+                int modificadoresDoAtirador = (adestramentoAtirador + raioDeAcaoAtirador + pontariaAtirador - concentracaoAtirador - vigorAtirador);
+                
+                Debug.LogFormat("Modificadores do Atirador: Adestramento = {0}; Raio de Ação = {1}; Pontaria = {2}; Concentração = {3}; Vigor = {4}.", adestramentoAtirador, raioDeAcaoAtirador, pontariaAtirador,concentracaoAtirador,vigorAtirador);
+                
+                adestramentoAlvo = combatUnitScript.adestramento;
+                protecaoAlvo = combatUnitScript.protecao;
+                visibilidadeAlvo = combatUnitScript.visibilidade;
+                movimentoAlvo = combatUnitScript.movimento;
+
+                // Modificadores relativos
+//                distanciaAtiradorAlvo = medirDistânciaEntreGameObjects
+//                inclinacaoAtiradorAlvo = medirAnguloEntreGameObjects
+
+                int modificadoresDoAlvo = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
+                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
+
+                int hitProbabilityValue = (modificadoresDoAtirador - modificadoresDoAlvo);                
+                Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
+                hitProbability = CalculateHitProbability(hitProbabilityValue);
+                Debug.LogFormat("Probabilidade de Acerto = {0}%", hitProbability*100);
+
+                ntzProbability = CalculateNeutralizationProbability(hitProbability);
+                Debug.LogFormat("Probabilidade de Neutralização = {0}%", ntzProbability*100);
+                Debug.LogFormat("Quantidade de Testes = {0}", numberOfTests);
+
+                for (int i = 1; i < numberOfTests+1; i++)
+                {
+                    int luckResult = DiceRoll.RollD100();
+                    Debug.LogFormat("Rolagem Nr {0}, d100 = {1}", i, luckResult);
+
+                    if (luckResult <= ntzProbability*100)
+                    {
+                        int finalDamage = 1;
+                        combatUnitScript.TakeDamage(finalDamage);
+                        Debug.LogFormat("{0} is attacking {1} with {2} damage", targetUnit.UnitRaceType, combatUnitScript.UnitRaceType, finalDamage);
+                    } else 
+                    {
+                        Debug.LogFormat("{0} attack failed", targetUnit.UnitRaceType);
+                    }
+                }
+            }
+        }
+
         private float CalculateHitProbability(int referenceValue)
         {
             if (referenceValue <= -8) {return 0.05f;}
@@ -150,23 +211,23 @@ namespace Pointo.Unit
 
         private float CalculateNeutralizationProbability(float singleHitProbability)
         {
-            int shootersQuantity = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
-            int targetsQuantity = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
-            Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", shootersQuantity,targetsQuantity); 
+            int QuantidadeDeAtiradores = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
+            int QuantidadeDeAlvos = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
+            Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", QuantidadeDeAtiradores,QuantidadeDeAlvos); 
 
-            if (shootersQuantity <= targetsQuantity)
+            if (QuantidadeDeAtiradores <= QuantidadeDeAlvos)
             {
-                numberOfTests = shootersQuantity;
-                groupsOfShooters = 1.0f;
+                numberOfTests = QuantidadeDeAtiradores;
+                groposDeAtiradores = 1.0f;
             } else
             {
-                numberOfTests = targetsQuantity;
-                groupsOfShooters = Mathf.RoundToInt(shootersQuantity/targetsQuantity);
+                numberOfTests = QuantidadeDeAlvos;
+                groposDeAtiradores = Mathf.RoundToInt(QuantidadeDeAtiradores/QuantidadeDeAlvos);
             }
 
-            Debug.LogFormat("Grupos de Atiradores = {0} Homens / Alvo", groupsOfShooters);
+            Debug.LogFormat("Grupos de Atiradores = {0} Homens / Alvo", groposDeAtiradores);
 
-            float ntzValue = 1 - Mathf.Pow((1 - singleHitProbability), groupsOfShooters);
+            float ntzValue = 1 - Mathf.Pow((1 - singleHitProbability), groposDeAtiradores);
             float ntzPercentage = Mathf.Round(ntzValue * 100.0f) * 0.01f;
             return ntzPercentage;
         }
