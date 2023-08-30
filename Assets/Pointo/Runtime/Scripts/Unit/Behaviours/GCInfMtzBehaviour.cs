@@ -60,8 +60,9 @@ namespace Pointo.Unit
             if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed)
             {
                 StartCoroutine(CombatLoop());
-            } else if(targetObject.GetComponent<UnitTargetHandler>().currentState == UnitTargetHandler.UnitState.Destroyed)
+            } else if(targetObject.GetComponent<UnitTargetHandler>().currentState == UnitTargetHandler.UnitState.Destroyed || targetHandler.currentState == UnitTargetHandler.UnitState.Destroyed)
             {
+                Debug.Log("CombatLoop will stop now");
                 StopCoroutine(CombatLoop());
             }
 
@@ -71,15 +72,18 @@ namespace Pointo.Unit
         {
             float waitingTime = combatUnitScript.unitSo.coolDownTime;
 
-            targetHandler.IsBreathing();
-
             yield return new WaitForSeconds(waitingTime);
             
             targetHandler.IsFighting();
 
+            Debug.Log("Início do turno do Atacante");
             AttackerTurn();
+            Debug.Log("Início do turno do Defensor");
             DefenderTurn();
 
+            targetHandler.IsBreathing();
+
+            Debug.Log("Fim do ciclo de confronto");
         }
 
         private void AttackerTurn ()
