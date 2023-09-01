@@ -60,7 +60,9 @@ namespace Pointo.Unit
             if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && 
             targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed && targetHandler.currentState != UnitTargetHandler.UnitState.Destroyed)
             {
+                Debug.Log("Turno do Atacante");
                 AttackerTurn();
+                Debug.Log("Turno do Defensor");                
                 DefenderTurn();
             }
         }
@@ -89,7 +91,10 @@ namespace Pointo.Unit
 
                 // Modificadores relativos
 //                distanciaAtiradorAlvo = medirDistânciaEntreGameObjects
-//                inclinacaoAtiradorAlvo = medirAnguloEntreGameObjects
+
+                Vector3 targetDirection = targetObject.transform.position - transform.position;
+                int shootingAngleValue = Mathf.RoundToInt(Vector3.Angle(targetDirection, transform.forward));
+                inclinacaoAtiradorAlvo = CalculateAngleValue (shootingAngleValue);
 
                 int modificadoresDoAlvo = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
                 Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
@@ -149,7 +154,10 @@ namespace Pointo.Unit
 
                 // Modificadores relativos
 //                distanciaAtiradorAlvo = medirDistânciaEntreGameObjects
-//                inclinacaoAtiradorAlvo = medirAnguloEntreGameObjects
+                
+                Vector3 targetDirection = transform.position - targetObject.transform.position;
+                int shootingAngleValue = Mathf.RoundToInt(Vector3.Angle(targetDirection, targetHandler.transform.forward));
+                inclinacaoAtiradorAlvo = CalculateAngleValue (shootingAngleValue);
 
                 int modificadoresDoAlvo = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
                 Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
@@ -182,6 +190,16 @@ namespace Pointo.Unit
                     }
                 }
             }
+        }
+
+        private int CalculateAngleValue (int referenceAngle)
+        {
+            if (referenceAngle <= 5) {return 0;}
+            else if (5 < referenceAngle && referenceAngle <= 25) {return 1;}
+            else if (25 < referenceAngle && referenceAngle <= 50) {return 2;}
+            else if (50 < referenceAngle && referenceAngle <= 75) {return 3;}
+            else if (75 < referenceAngle && referenceAngle <= 90) {return 4;}
+            else return 0;
         }
 
         private float CalculateHitProbability(int referenceValue)
