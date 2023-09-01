@@ -32,7 +32,7 @@ namespace Pointo.Unit
 
         public float hitProbability = 0;
         public float ntzProbability = 0;
-        private float groposDeAtiradores = 1.0f;
+        private float gruposDeAtiradores = 1.0f;
         private int numberOfTests;
 
         private void Start()
@@ -57,33 +57,12 @@ namespace Pointo.Unit
             if (targetUnit == null) return;
 
             // we check on the Scriptable Object if we should attack
-            if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed)
+            if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && 
+            targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed && targetHandler.currentState != UnitTargetHandler.UnitState.Destroyed)
             {
-                StartCoroutine(CombatLoop());
-            } else if(targetObject.GetComponent<UnitTargetHandler>().currentState == UnitTargetHandler.UnitState.Destroyed || targetHandler.currentState == UnitTargetHandler.UnitState.Destroyed)
-            {
-                Debug.Log("CombatLoop will stop now");
-                StopCoroutine(CombatLoop());
+                AttackerTurn();
+                DefenderTurn();
             }
-
-        }
-
-        IEnumerator CombatLoop()
-        {
-            float waitingTime = combatUnitScript.unitSo.coolDownTime;
-
-            yield return new WaitForSeconds(waitingTime);
-            
-            targetHandler.IsFighting();
-
-            Debug.Log("Início do turno do Atacante");
-            AttackerTurn();
-            Debug.Log("Início do turno do Defensor");
-            DefenderTurn();
-
-            targetHandler.IsBreathing();
-
-            Debug.Log("Fim do ciclo de confronto");
         }
 
         private void AttackerTurn ()
@@ -117,10 +96,14 @@ namespace Pointo.Unit
 
                 int hitProbabilityValue = (modificadoresDoAtirador - modificadoresDoAlvo);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
+
                 hitProbability = CalculateHitProbability(hitProbabilityValue);
                 Debug.LogFormat("Probabilidade de Acerto = {0}%", hitProbability*100);
 
-                ntzProbability = CalculateNeutralizationProbability(hitProbability);
+                int efetivoAtacante = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
+                int efetivoDefensor = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
+
+                ntzProbability = CalculateNeutralizationProbability(hitProbability, efetivoAtacante, efetivoDefensor);
                 Debug.LogFormat("Probabilidade de Neutralização = {0}%", ntzProbability*100);
                 Debug.LogFormat("Quantidade de Testes = {0}", numberOfTests);
 
@@ -176,7 +159,10 @@ namespace Pointo.Unit
                 hitProbability = CalculateHitProbability(hitProbabilityValue);
                 Debug.LogFormat("Probabilidade de Acerto = {0}%", hitProbability*100);
 
-                ntzProbability = CalculateNeutralizationProbability(hitProbability);
+                int efetivoAtacante = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
+                int efetivoDefensor = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
+
+                ntzProbability = CalculateNeutralizationProbability(hitProbability, efetivoDefensor, efetivoAtacante);
                 Debug.LogFormat("Probabilidade de Neutralização = {0}%", ntzProbability*100);
                 Debug.LogFormat("Quantidade de Testes = {0}", numberOfTests);
 
@@ -213,25 +199,23 @@ namespace Pointo.Unit
             else return 0.0f;
         }
 
-        private float CalculateNeutralizationProbability(float singleHitProbability)
+        private float CalculateNeutralizationProbability(float singleHitProbability, int quantidadeDeAtiradores, int quantidadeDeAlvos)
         {
-            int QuantidadeDeAtiradores = Mathf.RoundToInt(combatUnitScript.efetivoAtual);
-            int QuantidadeDeAlvos = Mathf.RoundToInt(targetObject.GetComponent<CombatUnit>().efetivoAtual);
-            Debug.LogFormat("Efetivo do Atacante = {0}; Efetivo do Defensor = {1}.", QuantidadeDeAtiradores,QuantidadeDeAlvos); 
+            Debug.LogFormat("Quantidade de Atiradores = {0}; Quantidade de Alvos = {1}.", quantidadeDeAtiradores,quantidadeDeAlvos); 
 
-            if (QuantidadeDeAtiradores <= QuantidadeDeAlvos)
+            if (quantidadeDeAtiradores <= quantidadeDeAlvos)
             {
-                numberOfTests = QuantidadeDeAtiradores;
-                groposDeAtiradores = 1.0f;
+                numberOfTests = quantidadeDeAtiradores;
+                gruposDeAtiradores = 1.0f;
             } else
             {
-                numberOfTests = QuantidadeDeAlvos;
-                groposDeAtiradores = Mathf.RoundToInt(QuantidadeDeAtiradores/QuantidadeDeAlvos);
+                numberOfTests = quantidadeDeAlvos;
+                gruposDeAtiradores = Mathf.RoundToInt(quantidadeDeAtiradores/quantidadeDeAlvos);
             }
 
-            Debug.LogFormat("Grupos de Atiradores = {0} Homens / Alvo", groposDeAtiradores);
+            Debug.LogFormat("Grupos de Atiradores = {0} Homens / Alvo", gruposDeAtiradores);
 
-            float ntzValue = 1 - Mathf.Pow((1 - singleHitProbability), groposDeAtiradores);
+            float ntzValue = 1 - Mathf.Pow((1 - singleHitProbability), gruposDeAtiradores);
             float ntzPercentage = Mathf.Round(ntzValue * 100.0f) * 0.01f;
             return ntzPercentage;
         }
