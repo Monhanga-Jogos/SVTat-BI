@@ -116,10 +116,10 @@ namespace Pointo.Unit
                     {
                         int finalDamage = 1;
                         targetUnit.GetComponent<CombatUnit>().TakeDamage(finalDamage);
-                        Debug.LogFormat("{0} is attacking {1} with {2} damage", combatUnitScript.UnitRaceType, targetUnit.UnitRaceType, finalDamage);
+                        Debug.LogFormat("{0} {1} neutralizou {2} militar de {3} {4}", combatUnitScript.UnitRaceType, gameObject.name, finalDamage, targetUnit.UnitRaceType, targetObject.name);
                     } else 
                     {
-                        Debug.LogFormat("{0} attack failed", combatUnitScript.UnitRaceType);
+                        Debug.LogFormat("Ataque de {0} {1} falhou", combatUnitScript.UnitRaceType, gameObject.name);
                     }
                 }
             }
@@ -175,10 +175,10 @@ namespace Pointo.Unit
                     {
                         int finalDamage = 1;
                         combatUnitScript.TakeDamage(finalDamage);
-                        Debug.LogFormat("{0} is attacking {1} with {2} damage", targetUnit.UnitRaceType, combatUnitScript.UnitRaceType, finalDamage);
+                        Debug.LogFormat("{0} {1} neutralizou {2} militar de {3} {4}", targetUnit.UnitRaceType, targetObject.name, finalDamage, combatUnitScript.UnitRaceType, gameObject.name);
                     } else 
                     {
-                        Debug.LogFormat("{0} attack failed", targetUnit.UnitRaceType);
+                        Debug.LogFormat("Ataque de {0} {1} falhou", targetUnit.UnitRaceType, targetObject.name);
                     }
                 }
             }
