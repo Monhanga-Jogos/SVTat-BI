@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Pointo.Unit
 {
@@ -36,6 +37,7 @@ namespace Pointo.Unit
             if (efetivoAtual <= 0)
             {
                 UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
+                GetComponent<NavMeshAgent>().isStopped = true;
                 GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
                 GetComponent<BoxCollider>().enabled = false;
                 this.enabled = false;                
