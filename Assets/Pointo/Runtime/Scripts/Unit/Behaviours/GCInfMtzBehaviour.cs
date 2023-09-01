@@ -97,7 +97,7 @@ namespace Pointo.Unit
                 inclinacaoAtiradorAlvo = CalculateAngleValue (shootingAngleValue);
 
                 int modificadoresDoAlvo = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
-                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
+                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação = {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
 
                 int hitProbabilityValue = (modificadoresDoAtirador - modificadoresDoAlvo);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
@@ -160,7 +160,7 @@ namespace Pointo.Unit
                 inclinacaoAtiradorAlvo = CalculateAngleValue (shootingAngleValue);
 
                 int modificadoresDoAlvo = (adestramentoAlvo + protecaoAlvo + visibilidadeAlvo + movimentoAlvo + distanciaAtiradorAlvo + inclinacaoAtiradorAlvo);
-                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
+                Debug.LogFormat("Modificadores do Alvo: Adestramento = {0}; Proteção = {1}; Visibilidade = {2}; Movimento = {3}; Distância = {4}; Inclinação = {5}.", adestramentoAlvo,protecaoAlvo,visibilidadeAlvo,movimentoAlvo,distanciaAtiradorAlvo,inclinacaoAtiradorAlvo);
 
                 int hitProbabilityValue = (modificadoresDoAtirador - modificadoresDoAlvo);                
                 Debug.LogFormat("Valor de Referência da Probabilidade de Acerto = {0}", hitProbabilityValue);
