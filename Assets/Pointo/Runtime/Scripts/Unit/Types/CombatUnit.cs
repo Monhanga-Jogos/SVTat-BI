@@ -38,6 +38,7 @@ namespace Pointo.Unit
                 UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
                 GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
                 GetComponent<BoxCollider>().enabled = false;
+                this.enabled = false;
             }
         }
         private void HandleObjectClicked(GameObject targetObject)
