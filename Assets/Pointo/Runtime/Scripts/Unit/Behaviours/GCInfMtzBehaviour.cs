@@ -90,7 +90,9 @@ namespace Pointo.Unit
                 movimentoAlvo = targetObject.GetComponent<CombatUnit>().movimento;
 
                 // Modificadores relativos
-//                distanciaAtiradorAlvo = medirDistânciaEntreGameObjects
+                float distanceShooterTarget = Vector3.Distance(transform.position, targetObject.transform.position);
+                int distanceValue = Mathf.RoundToInt(distanceShooterTarget);
+                distanciaAtiradorAlvo = CalculateDistanceValue(distanceValue);
 
                 Vector3 targetDirection = targetObject.transform.position - transform.position;
                 int shootingAngleValue = Mathf.RoundToInt(Vector3.Angle(targetDirection, transform.forward));
@@ -153,7 +155,9 @@ namespace Pointo.Unit
                 movimentoAlvo = combatUnitScript.movimento;
 
                 // Modificadores relativos
-//                distanciaAtiradorAlvo = medirDistânciaEntreGameObjects
+                float distanceShooterTarget = Vector3.Distance(transform.position, targetObject.transform.position);
+                int distanceValue = Mathf.RoundToInt(distanceShooterTarget);
+                distanciaAtiradorAlvo = CalculateDistanceValue(distanceValue);
                 
                 Vector3 targetDirection = transform.position - targetObject.transform.position;
                 int shootingAngleValue = Mathf.RoundToInt(Vector3.Angle(targetDirection, targetHandler.transform.forward));
@@ -192,6 +196,18 @@ namespace Pointo.Unit
             }
         }
 
+        private int CalculateDistanceValue (int referenceDistance)
+        {
+            // Essa tabela serve apenas para o FAL
+            if (referenceDistance <= 50) {return 0;}
+            else if (50 < referenceDistance && referenceDistance <= 150) {return 1;}
+            else if (150 < referenceDistance && referenceDistance <= 300) {return 2;}
+            else if (300 < referenceDistance && referenceDistance <= 400) {return 3;}
+            else if (400 < referenceDistance && referenceDistance <= 600) {return 4;}
+            // Será necessário limitar quando o alcance for maior que o máximo do armamento
+            else return 5;
+        }
+
         private int CalculateAngleValue (int referenceAngle)
         {
             if (referenceAngle <= 5) {return 0;}
@@ -199,6 +215,7 @@ namespace Pointo.Unit
             else if (25 < referenceAngle && referenceAngle <= 50) {return 2;}
             else if (50 < referenceAngle && referenceAngle <= 75) {return 3;}
             else if (75 < referenceAngle && referenceAngle <= 90) {return 4;}
+            // Necessário fazer o cálculo dos ângulos considerando 360 graus
             else return 0;
         }
 
