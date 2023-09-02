@@ -82,10 +82,6 @@ namespace Pointo.Unit
 
             if (targetUnit == null) return;
 
-            
-
-
-
         }
 
         private void AttackerTurn ()
