@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Pointo.Unit
 {
@@ -36,9 +37,10 @@ namespace Pointo.Unit
             if (efetivoAtual <= 0)
             {
                 UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
+                GetComponent<NavMeshAgent>().isStopped = true;
                 GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
                 GetComponent<BoxCollider>().enabled = false;
-                this.enabled = false;
+                this.enabled = false;                
             }
         }
         private void HandleObjectClicked(GameObject targetObject)
@@ -50,7 +52,7 @@ namespace Pointo.Unit
             
             UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Fighting;
             
-            Debug.LogFormat("{0} is moving towards {1}", UnitRaceType, targetUnit.UnitRaceType);
+            Debug.LogFormat("{0} {1} está avançando para atacar {2} {3}", UnitRaceType, gameObject.name, targetUnit.UnitRaceType, targetObject.name);
         }
 
         public void TakeDamage (int damageTaken)

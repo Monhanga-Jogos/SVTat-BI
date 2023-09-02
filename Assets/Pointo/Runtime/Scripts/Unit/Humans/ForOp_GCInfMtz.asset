@@ -20,6 +20,6 @@ MonoBehaviour:
   operationalMat: {fileID: 2100000, guid: eb08fcf9097420e45b5b50ff57c45a17, type: 2}
   destroyedMat: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   attackPower: 2
-  defense: 1
   efetivoCompleto: 9
+  alcanceArmto: 5
   coolDownTime: 2

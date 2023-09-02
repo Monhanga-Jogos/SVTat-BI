@@ -398,19 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &238014563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -1294,19 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &806036690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,7 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -1582,19 +1558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 1
 --- !u!114 &879216990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1607,7 +1571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -1999,19 +1963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &987884212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2024,7 +1976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -2356,19 +2308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 1
 --- !u!114 &1163257787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2381,7 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -2860,19 +2800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &1370742099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2885,7 +2813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -3046,19 +2974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &1414607911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3071,7 +2987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -3232,19 +3148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 1
 --- !u!114 &1548876454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3257,7 +3161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -3418,19 +3322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &1627190400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3443,7 +3335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -3604,19 +3496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &1650887302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3629,7 +3509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -4408,19 +4288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &2061789333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4433,7 +4301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0
@@ -5148,19 +5016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  adestramentoAtirador: 0
-  raioDeAcaoAtirador: 0
-  pontariaAtirador: 0
-  concentracaoAtirador: 0
-  vigorAtirador: 0
-  adestramentoAlvo: 0
-  protecaoAlvo: 0
-  visibilidadeAlvo: 0
-  movimentoAlvo: 0
-  distanciaAtiradorAlvo: 0
-  inclinacaoAtiradorAlvo: 0
-  hitProbability: 0
-  ntzProbability: 0
+  defesaDeArea: 0
 --- !u!114 &8145696489936272207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5173,7 +5029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bea70a225114e229f6d8241b835cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 2
+  searchRadius: 0
   showGizmos: 1
   currentState: 0
   ShouldScanWorld: 0

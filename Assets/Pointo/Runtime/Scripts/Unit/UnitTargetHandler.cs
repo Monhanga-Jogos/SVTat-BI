@@ -12,7 +12,7 @@ namespace Pointo.Unit
     [RequireComponent(typeof(Unit))]
     public class UnitTargetHandler : MonoBehaviour
     {
-        [SerializeField] private float searchRadius = 1f;
+        [SerializeField] private float searchRadius = 0.0f;
 
         [Header("Toggle Gizmos")] 
         [SerializeField] private bool showGizmos;
@@ -33,6 +33,7 @@ namespace Pointo.Unit
             var unit = GetComponent<Unit>();
             coolDownTime = unit.GetCooldownTime();
             targetLayerMask = unit.GetTargetLayerMask();
+            searchRadius = GetComponent<CombatUnit>().unitSo.alcanceArmto;
 
             currentState = UnitState.Available;
         }
