@@ -64,6 +64,7 @@ namespace Pointo.Unit
                 if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && 
                 targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed && targetHandler.currentState != UnitTargetHandler.UnitState.Destroyed)
                 {
+                    GetComponent<AudioSource>().Play();
                     Debug.Log("Turno do Atacante");
                     AttackerTurn();
                     Debug.Log("Turno do Defensor");                

@@ -38,6 +38,7 @@ namespace Pointo.Unit
             {
                 UnitTargetHandler.currentState = UnitTargetHandler.UnitState.Destroyed;
                 GetComponent<NavMeshAgent>().isStopped = true;
+                GetComponent<AudioSource>().Stop();
                 GetComponent<MeshRenderer>().material = unitSo.destroyedMat;
                 GetComponent<BoxCollider>().enabled = false;
                 this.enabled = false;                
