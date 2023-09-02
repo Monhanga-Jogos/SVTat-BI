@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Pointo.Unit
 {
@@ -15,23 +16,26 @@ namespace Pointo.Unit
 
         public GameObject targetObject;
 
-//Modificadores do Atirador
-        public int adestramentoAtirador;
-        public int raioDeAcaoAtirador;
-        public int pontariaAtirador;
-        public int concentracaoAtirador;
-        public int vigorAtirador;
+// Postura
+        [SerializeField] private bool defesaDeArea;
 
-//Modificadores do Alvo
-        public int adestramentoAlvo;
-        public int protecaoAlvo;
-        public int visibilidadeAlvo;
-        public int movimentoAlvo;
-        public int distanciaAtiradorAlvo;
-        public int inclinacaoAtiradorAlvo;
+// Modificadores do Atirador
+        private int adestramentoAtirador;
+        private int raioDeAcaoAtirador;
+        private int pontariaAtirador;
+        private int concentracaoAtirador;
+        private int vigorAtirador;
 
-        public float hitProbability = 0;
-        public float ntzProbability = 0;
+// Modificadores do Alvo
+        private int adestramentoAlvo;
+        private int protecaoAlvo;
+        private int visibilidadeAlvo;
+        private int movimentoAlvo;
+        private int distanciaAtiradorAlvo;
+        private int inclinacaoAtiradorAlvo;
+
+        private float hitProbability = 0;
+        private float ntzProbability = 0;
         private float gruposDeAtiradores = 1.0f;
         private int numberOfTests;
 
@@ -40,6 +44,10 @@ namespace Pointo.Unit
             combatUnitScript = GetComponent<CombatUnit>();
             targetHandler = GetComponent<UnitTargetHandler>();
             targetHandler.OnObjectReached = HandleEnemyReached;
+            if(defesaDeArea == true)
+            {
+                GetComponent<NavMeshAgent>().speed = 0.0f;
+            }
         }
 
         private void Update()
