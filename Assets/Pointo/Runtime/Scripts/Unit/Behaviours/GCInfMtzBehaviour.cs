@@ -16,6 +16,9 @@ namespace Pointo.Unit
 
         public GameObject targetObject;
 
+        // O tempo dos ciclos está na escala de 1/20
+        private float fireRate = 6.0f;
+        private float nextFire;
 // Postura
         [SerializeField] private bool defesaDeArea;
 
@@ -48,11 +51,25 @@ namespace Pointo.Unit
             {
                 GetComponent<NavMeshAgent>().speed = 0.0f;
             }
+
+            nextFire = fireRate;
         }
 
         private void Update()
         {
-            // colocar combate no update??
+            if (targetObject != null && Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                // we check on the Scriptable Object if we should attack
+                if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && 
+                targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed && targetHandler.currentState != UnitTargetHandler.UnitState.Destroyed)
+                {
+                    Debug.Log("Turno do Atacante");
+                    AttackerTurn();
+                    Debug.Log("Turno do Defensor");                
+                    DefenderTurn();
+                }
+            }
         }
 
 
@@ -64,15 +81,10 @@ namespace Pointo.Unit
 
             if (targetUnit == null) return;
 
-            // we check on the Scriptable Object if we should attack
-            if (combatUnitScript.unitSo.ShouldAttack(targetUnit.UnitRaceType) && 
-            targetObject.GetComponent<UnitTargetHandler>().currentState != UnitTargetHandler.UnitState.Destroyed && targetHandler.currentState != UnitTargetHandler.UnitState.Destroyed)
-            {
-                Debug.Log("Turno do Atacante");
-                AttackerTurn();
-                Debug.Log("Turno do Defensor");                
-                DefenderTurn();
-            }
+            
+
+
+
         }
 
         private void AttackerTurn ()
