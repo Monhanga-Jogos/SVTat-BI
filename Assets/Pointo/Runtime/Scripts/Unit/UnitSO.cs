@@ -17,6 +17,7 @@ namespace Pointo.Unit
         public Material destroyedMat;
         public float attackPower = 1.0f;
         public int efetivoCompleto = 10;
+        // As distâncias estão na escala 1/10
         public float alcanceArmto;
 
         [Tooltip("Time to rest after collecting a Resource")]

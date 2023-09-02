@@ -206,12 +206,13 @@ namespace Pointo.Unit
 
         private int CalculateDistanceValue (int referenceDistance)
         {
+            // As distâncias estão na escala 1/10
             // Essa tabela serve apenas para o FAL
-            if (referenceDistance <= 50) {return 0;}
-            else if (50 < referenceDistance && referenceDistance <= 150) {return 1;}
-            else if (150 < referenceDistance && referenceDistance <= 300) {return 2;}
-            else if (300 < referenceDistance && referenceDistance <= 400) {return 3;}
-            else if (400 < referenceDistance && referenceDistance <= 600) {return 4;}
+            if (referenceDistance <= 5) {return 0;}
+            else if (5 < referenceDistance && referenceDistance <= 15) {return 1;}
+            else if (15 < referenceDistance && referenceDistance <= 30) {return 2;}
+            else if (30 < referenceDistance && referenceDistance <= 40) {return 3;}
+            else if (40 < referenceDistance && referenceDistance <= 60) {return 4;}
             // Será necessário limitar quando o alcance for maior que o máximo do armamento
             else return 5;
         }
@@ -239,6 +240,7 @@ namespace Pointo.Unit
             else if (4 < referenceValue && referenceValue <= 6) {return 0.75f;}
             else if (6 < referenceValue && referenceValue <= 8) {return 0.85f;}
             else if (8 > referenceValue) {return 0.95f;}
+            // Necessário verificar porque nem todos os valores estão contemplados
             else return 0.0f;
         }
 
