@@ -1,3 +1,6 @@
+<img width="708" alt="image" src="https://github.com/user-attachments/assets/08007d89-5bbc-45f1-816f-bb86a6a8cb78" />
+<img width="590" alt="image" src="https://github.com/user-attachments/assets/d18ef977-d961-43cf-9f69-37623589309f" />
+
 # ENG - Virtual Tactical Simulator for Infantry Battalions
 Prototype tool to execute virtual wargames, as a realistic Real-Time Tactics (RTT), approaching combat on Military Unit level, allowing the change of echelon on observation, so that combat calculations are abstractions to reflect this level, but visualizing a lower level unit.
 
